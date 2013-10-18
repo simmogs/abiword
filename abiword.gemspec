@@ -1,10 +1,12 @@
 #require 'rubygems'
 #require 'rake/packagetask'
 #require 'rake/gempackagetask'
+$:.push File.expand_path("../lib", __FILE__)
+require "abiword/version"
 
 spec = Gem::Specification.new do |s|
   s.name = "abiword"
-  s.version = "0.2.3"
+  s.version = Abiword::VERSION
   s.authors = ["Puneet Paul"]
   s.email = "puneetpaul74@gmail.com"
   s.platform = Gem::Platform::RUBY
@@ -15,4 +17,9 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = false
   s.require_path = ["lib"]
   s.homepage = 'http://rubygems.org/gems/abiword'
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'test-unit'
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-test'
 end
