@@ -18,8 +18,11 @@ spec = Gem::Specification.new do |s|
   s.require_path = ["lib"]
   s.homepage = 'http://rubygems.org/gems/abiword'
 
+  s.add_runtime_dependency 'mimemagic'
+
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'test-unit'
+  s.add_development_dependency 'bundler'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-test'
+  s.add_development_dependency 'test-unit'
 end

@@ -37,13 +37,28 @@ module Abiword
       convert(infile, 'odt')
     end
 
+    def self.odt2doc(infile)
+      convert(infile, 'doc')
+    end
+
+    def self.acceptable_format?(infile)
+      mime = MimeMagic.by_magic(File.open(infile)).to_s
+      case mime
+      when "application/msword" then true
+      when "application/vnd.oasis.opendocument.text" then true
+      else
+        mime
+      end
+    end
+
     def self.convert(infile, target_format)
       self.set_binary_path if @@binary_path.empty?
       ext  = File.extname(infile)
 
-      raise Exceptions::AbiwordException if (ext != ".doc" && ext != ".docx")
+      raise Exceptions::AbiwordException, "Input file does not exist" if !File.exists?(infile)
 
-      raise Exceptions::AbiwordException if !File.exists?(infile)
+      check_format = acceptable_format?(infile)
+      raise Exceptions::AbiwordException, "File type is incorrect : #{check_format}" unless check_format == true
 
       outfile = File.join(File.dirname(infile),File.basename(infile,".*")) + ".#{target_format}"
       cmd = @@binary_path

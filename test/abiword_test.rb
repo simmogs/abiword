@@ -1,4 +1,5 @@
 require 'test/unit'
+#require 'test_helper'
 require File.join(File.dirname(File.dirname(__FILE__)),"lib/abiword")
 
 class AbiwordTest < Test::Unit::TestCase
